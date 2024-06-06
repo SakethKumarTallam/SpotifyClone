@@ -17,7 +17,7 @@ function secondsToMinutes(totalSeconds) {
 
 async function getSongs(folder) {
     curFolder=folder;
-    let a = await fetch(`http://127.0.0.1:3000/spotify/songs/${curFolder}/`)
+    let a = await fetch(`http://127.0.0.1:3000/songs/${curFolder}/`)
     let response = await a.text();
     let div = document.createElement('div');
     div.innerHTML = response;
@@ -57,7 +57,7 @@ const playmusic = (e,pause=false) =>{
     if(!pause){
         play.src = "pause.svg"
         document.querySelector('.ab .info').innerHTML=e.replaceAll('%20',' ');
-        currentsong.src=`/spotify/songs/${curFolder}/`+ e
+        currentsong.src=`/songs/${curFolder}/`+ e
         currentsong.play()
     }
     else{
@@ -67,7 +67,7 @@ const playmusic = (e,pause=false) =>{
     document.querySelector('.ab .time').innerHTML="00:00 / 00:00"
 }
 async function ldAlb(){
-    let a = await fetch(`http://127.0.0.1:3000/spotify/songs/`)
+    let a = await fetch(`http://127.0.0.1:3000/songs/`)
     let response = await a.text();
     let div1=document.createElement('div');
     div1.innerHTML=response;
@@ -81,7 +81,7 @@ async function ldAlb(){
             console.log(titles);
             let div=document.createElement('div');
             div.innerHTML=`<div class="prof1" data-fdr="${fold}">
-            <img src="/spotify/songs/${fold}/cover.jpeg" alt="">
+            <img src="/songs/${fold}/cover.jpeg" alt="">
             <h4>${titles.title}</h4>
             <div class="msg">${titles.description}</div>
             <div class="play"></div>
