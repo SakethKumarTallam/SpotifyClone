@@ -48,7 +48,6 @@ async function getSongs(folder) {
             playmusic(element.querySelector('ul li').innerHTML.trim());
         })
     });
-
     return songs;
 }
 const playmusic = (e,pause=false) =>{
@@ -73,9 +72,10 @@ async function ldAlb(){
     div1.innerHTML=response;
     let a_s=Array.from(div1.getElementsByTagName('a'))
     await Promise.all(a_s.map(async e => {
-        if(e.href.includes('/songs/')){
+        if((e.href.includes('/songs/')) && !(e.href.split('/songs/')[1].startsWith('.'))){
+            // console.log("two",!(e.href.split('/songs/')[1].startsWith('.')));
             let fold=e.href.split('/').slice(-2)[0]
-            console.log(e.href);
+            // console.log("One ",fold);
             let g = await fetch(`${e.href}info.json`);
             let titles = await g.json();
             console.log(titles);
